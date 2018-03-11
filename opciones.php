@@ -1,11 +1,11 @@
-<!--<?php
-include("./router.php")
-include("./login.php")
-include("./crear.php")
-include("./borrar.php")
-include("./mostrar.php")
+<?php
+include("./router.php");
+include("./login.php");
+include("./crear.php");
+include("./borrar.php");
+include("./mostrar.php");
 
-?>-->
+?>
 <html>
 
 <head>
