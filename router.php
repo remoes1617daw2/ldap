@@ -17,7 +17,10 @@ if(isset($_POST['enviar']) && $_POST['enviar']=='enviar'){
 	if($coneccion){
 		$binding=ldap_bind($coneccion,$ldapuser,$contraseña);
 			if($binding){
-			
+			$_SESSION["coneccion"]=$coneccion;
+			$_SESSION["binding"]=$binding;
+			$_SESSION["user"]=$ldapuser;
+			$_SESSION["pass"]=$contraseña;
 			header("Location: opciones.php");
 			
 			/*$parametro="cn=".$usuario."";
