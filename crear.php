@@ -5,7 +5,7 @@ include("./crear.php");
 include("./borrar.php");
 include("./mostrar.php");
 include("./modificar.php");
-
+session_start();
 ?>
 <html>
 
@@ -21,17 +21,18 @@ include("./modificar.php");
 <body>
     <div class="conatainer-fluid">
         <div class="row">
-            <div class="col-lg-4"></div>
+            <div class="col-lg-4 L"></div>
             <div class="col-lg-4">
                 <h2 class="text-primary">Crear Usuario</h2>
+                <h4 class="text-primary"><?php $_SESSION["resul"]  ?></h4>
                 <div class="mainContainer">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="id" placeholder="id" required>
+                            <input type="text" class="form-control" name="uid" placeholder="uid" required>
                             <input type="text" class="form-control" name="nombre" placeholder="nombre" required>
                             <input type="text" class="form-control" name="apellido" placeholder="apellido" required>
                             <input type="text" class="form-control" name="titulo" placeholder="titulo" required>
-                            <input type="text" class="form-control" name="telefono" placeholder="teléfono" required>
+                            <input type="text" class="form-control" name="telefono" placeholder="telefono" required>
                             <input type="text" class="form-control" name="mobil" placeholder="mobil" required>
                             <input type="text" class="form-control" name="direccion" placeholder="direccion" required>
                             <input type="text" class="form-control" name="numero" placeholder="numero" required>
@@ -51,7 +52,7 @@ include("./modificar.php");
                 </div>
 
             </div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-4 L"></div>
         </div>
     </div>
 

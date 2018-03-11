@@ -49,5 +49,38 @@ if(isset($_POST['enviar']) && $_POST['enviar']=='enviar'){
 
 
 }
+if(isset($_POST['crear']) && $_POST['crear']=='enviar'){
 
+
+	if($_SESSION["binding"]){
+	$record["objectclass"][0]="top";
+	$record["objectclass"][1]="person";
+	$record["objectclass"][2]="organizationalPerson";
+	$record["objectclass"][3]="inetOrgPerson";
+	$record["objectclass"][4]="posixAccount";
+	$record["objectclass"][5]="shadowAccount";
+	$record["uid"]=$_POST["uid"];
+	$record["cn"]=$_POST["nombre"]." ".$_POST["apellido"];
+	$record["sn"]=$_POST["apellido"];
+	$record["givenName"]=$_POST["nombre"];
+	$record["titulo"]=$_POST["titulo"];
+	$record["telefono"]=$_POST["telefono"];
+	$record["mobil"]=$_POST["mobil"];
+	$record["direccion"]=$_POST["direccion"];
+	$record["numero"]=$_POST["numero"];
+	$record["loginShell"]="/bin/bash";
+	$record["homeDirectory"]="/home/".$_POST["uid"];
+	$record["descripcion"]=$_POST["descripcion"];
+
+	$a = ldap_add($_SESSION["coneccion"],"".$_POST["nombre"].",dc=fjeclot,dc=net",$record);
+	if($a){$_SESSION["resul"]="Usuario Creado";}
+	}else{
+		$_SESSION["mainTittle"] = "FALLO AL CREAR NUEVA ENTRADA";
+		$_SESSION["secondaryTittle"] = "No ha sido posible crear un nuevo usuario en la base de datos :".$a;
+		$_SESSION["href"]="crear.php";
+		header("Location:error.php");
+	}	
+	
+
+}
 ?>
