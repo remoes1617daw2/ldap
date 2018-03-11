@@ -27,7 +27,7 @@ form{
 .inputs{
     text-align: center;
 }
-.col-lg-4{
+.L{
     height: 100%;
     background-color: #80b3ff;
 }
@@ -35,4 +35,10 @@ form{
     background-color: white;
 height: 20em;
 border-radius: 4em;
+}
+ul{
+    list-style-type: none;
+}
+ul a{
+   text-align: center;
 }

@@ -15,8 +15,8 @@ include("./router.php")
 <body>
     <div class="conatainer-fluid">
         <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 L"></div>
+            <div class="col-lg-4 L">
                 <div class="mainContainer">
                     <form action="router.php" method="POST">
                         <div class="form-group">
@@ -24,8 +24,8 @@ include("./router.php")
                             <input type="text" class="form-control" name="contraseña" placeholder="contraseña" required>
                         </div>
                         <div class="inputs">
-                            <input class="btn btn-primary btn-lg" type="submit" value="enviar" name="enviar">
-                            <input class="btn btn-primary btn-lg" type="reset" value="reset" name="reset">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Entrar" name="enviar">
+                            <input class="btn btn-primary btn-lg" type="reset" value="Reset" name="reset">
                         </div>
 
 
@@ -33,7 +33,7 @@ include("./router.php")
                 </div>
 
             </div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-4 L"></div>
         </div>
     </div>
 
