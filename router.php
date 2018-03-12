@@ -73,7 +73,11 @@ if(isset($_POST['crear']) && $_POST['crear']=='enviar'){
 	$record["descripcion"]=$_POST["descripcion"];
 
 	$a = ldap_add($_SESSION["coneccion"],"".$_POST["nombre"].",dc=fjeclot,dc=net",$record);
-	if($a){$_SESSION["resul"]="Usuario Creado";}
+	if($a){$_SESSION["mainTittle"]="Usuario creado con éxito";
+		$_SESSION["secondaryTittle"]=$a;
+		$_SESSION["href"]="crear.php";
+		header("Location: success.php");
+	}
 	}else{
 		$_SESSION["mainTittle"] = "FALLO AL CREAR NUEVA ENTRADA";
 		$_SESSION["secondaryTittle"] = "No ha sido posible crear un nuevo usuario en la base de datos :".$a;

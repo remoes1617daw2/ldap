@@ -24,7 +24,6 @@ session_start();
             <div class="col-lg-4 L"></div>
             <div class="col-lg-4">
                 <h2 class="text-primary">Crear Usuario</h2>
-                <h4 class="text-primary"><?php $_SESSION["resul"]  ?></h4>
                 <div class="mainContainer">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
