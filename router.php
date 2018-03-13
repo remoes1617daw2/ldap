@@ -49,6 +49,26 @@ if(isset($_POST['enviar']) && $_POST['enviar']=='enviar'){
 
 
 }
+if(isset($_POST['mostrar'])&& $_POST['mostrar']=='mostrar'){
+$n=	$_POST["nombre"]." ".$_POST["apellido"];
+$atrb =array("uid","cn","sn","givenName","description");
+$base="";
+$_SESSION["mainTittle"]="Fallo al mostrar usuario/s";
+$_SESSION["secondaryTittle"]="Se ha producido un error al realiazar esta busqueda";
+$_SESSION["href"]="mostrar.php";
+$resul=ldap_search($_SESSION["coneccion"],$base,"cn=".$n,$atrb) or die (header("Location:error.php"));
+
+$info = ldap_get_entries($_SESSION["coneccion"], $resul);
+$_SESSION["info"]=$info;
+/*
+for($i=0;$i<info["count"];$i++){
+	echo $info[$i]["uid"][0];
+	echo $info[$i]["cn"][0];
+	echo $info[$i]["sn"][0];
+	echo $info[$i]["givenName"][0];
+	echo $info[$i]["description"][0];
+}*/
+}
 if(isset($_POST['crear']) && $_POST['crear']=='enviar'){
 
 
@@ -63,14 +83,14 @@ if(isset($_POST['crear']) && $_POST['crear']=='enviar'){
 	$record["cn"]=$_POST["nombre"]." ".$_POST["apellido"];
 	$record["sn"]=$_POST["apellido"];
 	$record["givenName"]=$_POST["nombre"];
-	$record["titulo"]=$_POST["titulo"];
-	$record["telefono"]=$_POST["telefono"];
-	$record["mobil"]=$_POST["mobil"];
+	$record["title"]=$_POST["titulo"];
+	$record["telephoneNumber"]=$_POST["telefono"];
+	$record["mobile"]=$_POST["mobil"];
 	$record["direccion"]=$_POST["direccion"];
 	$record["numero"]=$_POST["numero"];
 	$record["loginShell"]="/bin/bash";
 	$record["homeDirectory"]="/home/".$_POST["uid"];
-	$record["descripcion"]=$_POST["descripcion"];
+	$record["description"]=$_POST["descripcion"];
 
 	$a = ldap_add($_SESSION["coneccion"],"".$_POST["nombre"].",dc=fjeclot,dc=net",$record);
 	if($a){$_SESSION["mainTittle"]="Usuario creado con éxito";
