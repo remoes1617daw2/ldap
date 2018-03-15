@@ -1,6 +1,4 @@
-<?php
-include("./router.php")
-?>
+
 <html>
 
 <head>

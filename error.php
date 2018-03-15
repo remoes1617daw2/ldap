@@ -1,8 +1,6 @@
 <!DOCTYPE hmtl>
 <html>
     <?php
-    include("./login.php");
-    include("./opciones.php");
     session_start();
 ?>
 <head>

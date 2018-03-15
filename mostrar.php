@@ -1,7 +1,5 @@
 <?php
-include("./router.php");
-include("login.php");
-include("./opciones.php");
+
 session_start();
 ?>
 <html>
@@ -24,7 +22,7 @@ session_start();
                 <div class="mainContainer">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="nombre" placeholder="nombre" required>
+                            <input type="text" class="form-control" name="name" placeholder="nombre" required>
                             <input type="text" class="form-control" name="apellido" placeholder="apellido" required>
                         </div>
                         <div class="inputs">

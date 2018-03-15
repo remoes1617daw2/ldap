@@ -1,12 +1,4 @@
-<?php
-include("./router.php");
-include("./login.php");
-include("./crear.php");
-include("./borrar.php");
-include("./mostrar.php");
-include("./modificar.php");
 
-?>
 <html>
 
 <head>
