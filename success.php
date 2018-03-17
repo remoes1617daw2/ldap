@@ -18,7 +18,8 @@
         </div>
         <div class="col-lg-4 INFOSuccess">
             <div class="mainTitleSuccess">
-            <?php echo "<h3>".$_SESSION["mainTittle"]."</h3>";?>
+                
+           <?php echo "<h3>".$_SESSION["mainTittle"]."</h3>";?>
             </div>
         </div>             
         <div class="col-lg-4">
@@ -30,12 +31,16 @@
         </div>
         <div class="col-lg-4">
             <div class="secondaryTitleSuccess">
-          <?php echo "<h4>".$_SESSION["secondaryTittle"]."</h4>"; ?>
+              
+        <?php echo "<h4>".$_SESSION["secondaryTittle"]."</h4>"; ?>
             </div>
-        <?php  echo '<a class="mainLink" href='.$_SESSION["href"].'><button class="btn btn-primary btn-lg" style="background-color:#00ff00;" type="button">Atras</button></a>'; ?>
-        <a href='login.php'>
-                        <button class="btn btn-primary btn-lg" type="button" style="background-color:#00ff00;">Salir</button>
-                </a>
+            <BR>
+            
+<div class="B">
+        <?php  echo '<a href='.$_SESSION["href"].'><button class="btn btn-primary btn-lg" style="background-color:#00ff00;float:left;" type="button">Atras</button></a>'; ?>
+        <a href='login.php'><button class="btn btn-primary btn-lg" type="button" style="background-color:#00ff00;float:right">Salir</button></a>
+</div>
+
         
         </div>             
         <div class="col-lg-4">

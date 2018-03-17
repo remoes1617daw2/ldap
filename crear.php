@@ -21,6 +21,7 @@ session_start();
                 <div class="mainContainer">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
+                            <input type="text" class="form-control" name="ou" placeholder="ou" required>
                             <input type="text" class="form-control" name="uid" placeholder="uid" required>
                             <input type="text" class="form-control" name="nombre" placeholder="nombre" required>
                             <input type="text" class="form-control" name="apellido" placeholder="apellido" required>
@@ -28,7 +29,8 @@ session_start();
                             <input type="text" class="form-control" name="telefono" placeholder="telefono" required>
                             <input type="text" class="form-control" name="mobil" placeholder="mobil" required>
                             <input type="text" class="form-control" name="direccion" placeholder="direccion" required>
-                            <input type="text" class="form-control" name="numero" placeholder="numero" required>
+                            <input type="number" class="form-control" name="uidnumber" placeholder="uidnumber" required>
+                            <input type="number" class="form-control" name="gidnumber" placeholder="gidnumber" required>
                             <textArea class="form-control" name="descripcion" rows="5" placeholder="descripcion" required></textArea>
 
                         </div>

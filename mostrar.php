@@ -22,8 +22,8 @@ session_start();
                 <div class="mainContainer">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="nombre" required>
-                            <input type="text" class="form-control" name="apellido" placeholder="apellido" required>
+                            <input type="text" class="form-control" name="uid" placeholder="uid" required>
+                            <input type="text" class="form-control" name="uo" placeholder="uo" required>
                         </div>
                         <div class="inputs">
                             <input class="btn btn-primary btn-lg" type="submit" value="mostrar" name="mostrar">
@@ -41,24 +41,7 @@ session_start();
                 </div>
 
             </div>
-            <div class="col-lg-4 ">
-            <?php
-            $info=$_SESSION["info"];
-            echo "<table>";
-            for($i=0;$i<info["count"];$i++){
-               echo "<tr>";
-               echo "<td>".$info[$i]["uid"][0]."</td>";
-               echo "<td>".$info[$i]["cn"][0]."</td>";
-               echo "<td>".$info[$i]["sn"][0]."</td>";
-               echo"<td>".$info[$i]["givenName"][0]."</td>";
-               echo "<td>".$info[$i]["description"][0]."</td>";
-               echo "</tr>";
-            }
-
-            echo "</table>";
-            ?>
-            
-            </div>
+            <div class="col-lg-4 "></div> 
         </div>
     </div>
 
