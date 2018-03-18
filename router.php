@@ -7,6 +7,7 @@ $usuario;
 $contraseña;
 
 
+//login
 if( isset($_POST['enviar']) && $_POST['enviar']== 'Entrar')
 {
 
@@ -45,51 +46,6 @@ if( isset($_POST['enviar']) && $_POST['enviar']== 'Entrar')
 }
 
 
-
-if(isset($_POST['enviar']) && $_POST['enviar']=='enviar'){
-	
-	$usuario=$_POST['nombre'];
-	$ldapuser  = "cn=".$usuario.",dc=fjeclot,dc=net";
-	$contraseña=$_POST['contraseña'];
-	
-	$coneccion=ldap_connect($ldaphost,$puerto) or die("No ha sido posible conectarse a la base de datos");
-	ldap_set_option($coneccion,LDAP_OPT_PROTOCOL_VERSION, 3);
-	if($coneccion){
-		$binding=ldap_bind($coneccion,$ldapuser,$contraseña);
-			if($binding){
-			$_SESSION["coneccion"]=$coneccion;
-			$_SESSION["binding"]=$binding;
-			$_SESSION["user"]=$ldapuser;
-			$_SESSION["pass"]=$contraseña;
-			header("Location: opciones.php");
-			
-			/*$parametro="cn=".$usuario."";
-			$array_Busqueda=array("ou");
-			$resultado_Busqueda=ldap_list($ldaphost,$parametro,"ou=*",$array_Busqueda);
-			$info_Busqueda=ldap_get_entries($ldaphost,$resultado_Busqueda);
-				
-			for($i=0;$i<$info_Busqueda["count"];$i++){
-				
-				echo $info_Busqueda[$i]["ou"][0];
-				
-		}*/
-		
-	}else{
-		$_SESSION["mainTittle"] = "FALLO DE CONECCIÓN";
-		$_SESSION["secondaryTittle"] = "No ha sido posible conectar con la base de datos";
-		$_SESSION["href"]="login.php";
-	header("Location: error.php");
-}
-	}else{
-		$_SESSION["mainTittle"] = "FALLO AL ENTRAR";
-		$_SESSION["secondaryTittle"] = "Nombre de usuario o contraseña incorrecta";
-		$_SESSION["href"]="login.php";
-	header("Location: error.php");
-}
-
-
-}
-
 //buscar usuarios
 if(isset($_POST['mostrar'])&& $_POST['mostrar']=='mostrar'){
 $user= $_POST["uid"];
@@ -97,28 +53,29 @@ $uo= "ou=".$_POST["uo"];
 $n=	$uo.",dc=fjeclot,dc=net";
 $filtro ="(uid=".$user.")";
 
-$_SESSION["mainTittle"]="Fallo de conexión";
-$_SESSION["secondaryTittle"]="No ha sido posible conectar con la base de datos";
+$_SESSION["mainTittle"]="Fallo al mostrar usuario/s";
+$_SESSION["secondaryTittle"]="Se ha producido un error al realizar esta búsqueda";
 $_SESSION["href"]="mostrar.php";
-$connection = ldap_connect("ldap://localhost", $puerto) or die(header("Location:error.php"));
+$connection = ldap_connect("ldap://localhost", $puerto) or die("No s'ha pogut establir una connexió amb el servidor openLDAP.");
 
     ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
 
 	if ($connection) {
 		$bind = ldap_bind($connection);	
 		if($bind){
-$_SESSION["mainTittle"]="Fallo al mostrar usuarios";
-$_SESSION["secondaryTittle"]="No ha sido posible realizar la búsqueda";
-$_SESSION["href"]="mostrar.php";
 			$resul=ldap_search($connection,$n, $filtro) or die (header("Location:error.php"));
 
 			$info = ldap_get_entries($connection, $resul);
 			$_SESSION["info"]=$info;
-			$_SESSION["mainTittle"]="Resultados de busqueda :";
-			$_SESSION["href"]="mostrar.php";
 			header("Location:resultado_mostrar.php");
 
-
+			/*for($i=0;$i<$info["count"];$i++){
+				echo $info[$i]["uid"][0];
+				echo $info[$i]["cn"][0];
+				echo $info[$i]["sn"][0];
+				echo $info[$i]["givenName"][0];
+				echo $info[$i]["description"][0];
+			}*/
 		}
 	}
 }
@@ -178,4 +135,44 @@ if($connection){
 }else{echo "error";}	
 
 }
+
+//borar usuarios
+if( isset($_POST['borrar']) && $_POST['borrar']=="Borrar")
+{
+$ldaphost = "localhost";
+$ldaprdn  = 'uid='.trim($_POST['uidBorrar']).',ou='.trim($_POST['ouBorrar']).',dc=fjeclot,dc=net';
+$ldappass = "fjeclot";  
+
+    $ldapconn = ldap_connect($ldaphost) or die("Could not connect to LDAP server.");
+    ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+    if ($ldapconn) {
+        $ldapbind = ldap_bind($ldapconn, "cn=admin,dc=fjeclot,dc=net", $ldappass);
+        if ($ldapbind) {
+       
+                $d = ldap_delete($ldapconn, $ldaprdn);
+                if($d){
+                $_SESSION["mainTittle"]="Usuario borrado con éxito";
+				$_SESSION["secondaryTittle"]="El usuario ".trim($_POST['uidBorrar'])." se ha borrado de la base de datos";
+				$_SESSION["href"]="borrar.php";
+				header("Location: success.php");}
+                else{
+				   $_SESSION["mainTittle"] = "FALLO AL BORRAR ENTRADA";
+				   $_SESSION["secondaryTittle"] = "No es reconocido el usuario ".trim($_POST['uidBorrar'])."en la base de datos";
+				   $_SESSION["href"]="borrar.php";
+				   header("Location:error.php");} 
+        } 
+        else {
+        		$_SESSION["mainTittle"] = "FALLO AL ENTRAR BASE DE DATOS";
+				$_SESSION["secondaryTittle"] = "No ha sido posible autentificarse";
+				$_SESSION["href"]="borrar.php";
+				header("Location:error.php");
+        }
+   }else {
+        $_SESSION["mainTittle"] = "FALLO AL CONECTAR BASE DE DATOS";
+				$_SESSION["secondaryTittle"] = "No ha sido posible conectarse";
+				$_SESSION["href"]="borrar.php";
+				header("Location:error.php");
+        }
+ }
+
 ?>
