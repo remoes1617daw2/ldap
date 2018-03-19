@@ -141,6 +141,7 @@ if( isset($_POST['borrar']) && $_POST['borrar']=="Borrar")
 {
 $ldaphost = "localhost";
 $ldaprdn  = 'uid='.trim($_POST['uidBorrar']).',ou='.trim($_POST['ouBorrar']).',dc=fjeclot,dc=net';
+
 $ldappass = "fjeclot";  
 
     $ldapconn = ldap_connect($ldaphost) or die("Could not connect to LDAP server.");
@@ -148,6 +149,9 @@ $ldappass = "fjeclot";
     if ($ldapconn) {
         $ldapbind = ldap_bind($ldapconn, "cn=admin,dc=fjeclot,dc=net", $ldappass);
         if ($ldapbind) {
+			
+
+					
        
                 $d = ldap_delete($ldapconn, $ldaprdn);
                 if($d){
