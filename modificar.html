@@ -1,0 +1,77 @@
+<?php
+session_start();
+?>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="conatainer-fluid">
+        <div class="row">
+            <div class="col-lg-4 L"></div>
+            <div class="col-lg-4">
+                <h2 class="text-primary">Modificar Usuario</h2>
+                <div class="mainContainer">
+                    <form action="router.php" method="POST" style="margin-top: 0em !important;">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="ou" placeholder="ou" required>
+                            <input type="text" class="form-control" name="uid" placeholder="uid" required>
+                            <div class="radio"> 
+                            <label><input type="radio" name="radio" value="nombre">nombre</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="apellido">apellido</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="titulo" >título</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="telefono">teléfono</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="mobil">mobil</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="direccion">dirección</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="uidnumber">uidnumber</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="gidnumber">gidnumber</label>
+                            </div>
+                            <div class="radio">
+                            <label><input type="radio" name="radio" value="descripcion">descripcion</label>
+                            </div>
+                            <input class="form-control" type="text" name="valor" value="">
+                           
+
+                        </div>
+                        <div class="inputs">
+                            <input class="btn btn-primary btn-lg" type="submit" value="modificar" name="modificar">
+                            <input class="btn btn-primary btn-lg" type="reset" value="Reset" name="reset">
+                            <a href='login.php'>
+                                    <button class="btn btn-primary btn-lg" type="button">Salir</button>
+                            </a>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-lg-4 L"></div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
