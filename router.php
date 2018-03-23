@@ -55,7 +55,7 @@ $filtro ="(uid=".$user.")";
 
 $_SESSION["mainTittle"]="Fallo al mostrar usuario/s";
 $_SESSION["secondaryTittle"]="Se ha producido un error al realizar esta búsqueda";
-$_SESSION["href"]="mostrar.php";
+$_SESSION["href"]="opciones.php";
 $connection = ldap_connect("ldap://localhost", $puerto) or die("No s'ha pogut establir una connexió amb el servidor openLDAP.");
 
     ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -67,15 +67,8 @@ $connection = ldap_connect("ldap://localhost", $puerto) or die("No s'ha pogut es
 
 			$info = ldap_get_entries($connection, $resul);
 			$_SESSION["info"]=$info;
+			$_SESSION["mainTittle"]="Mostrando";
 			header("Location:resultado_mostrar.php");
-
-			/*for($i=0;$i<$info["count"];$i++){
-				echo $info[$i]["uid"][0];
-				echo $info[$i]["cn"][0];
-				echo $info[$i]["sn"][0];
-				echo $info[$i]["givenName"][0];
-				echo $info[$i]["description"][0];
-			}*/
 		}
 	}
 }
@@ -110,6 +103,7 @@ if($connection){
 	$record["loginshell"]= "/bin/bash";
 	$record["homedirectory"]= "/home/".$_POST["uid"];
 	$record["description"]= $_POST["descripcion"];
+	$record["userpassword"] = $_POST["userpassword"];
 	
 	$uid=trim($_POST["uid"]);
 	$d="uid=".$uid.",ou=usuaris,dc=fjeclot,dc=net";
@@ -117,19 +111,19 @@ if($connection){
 	$a = ldap_add($connection, $d, $record);
 	if($a){$_SESSION["mainTittle"]="Usuario creado con éxito";
 		$_SESSION["secondaryTittle"]="El usuario ".$uid." se ha añadido a la base de datos";
-		$_SESSION["href"]="crear.php";
+		$_SESSION["href"]="opciones.php";
 		header("Location: success.php");
 	}else{
 		
 		$_SESSION["mainTittle"] = "FALLO AL CREAR NUEVA ENTRADA";
 		$_SESSION["secondaryTittle"] = "No ha sido posible crear un nuevo usuario en la base de datos :".$a;
-		$_SESSION["href"]="crear.php";
+		$_SESSION["href"]="opciones.php";
 		header("Location:error.php");
 	}	
 	}else{
 		$_SESSION["mainTittle"] = "FALLO AL CREAR NUEVA ENTRADA";
 		$_SESSION["secondaryTittle"] = "No ha sido posible crear un nuevo usuario en la base de datos :".$a;
-		$_SESSION["href"]="crear.php";
+		$_SESSION["href"]="opciones.php";
 		header("Location:error.php");
 	}	
 }else{echo "error";}	
@@ -141,7 +135,6 @@ if( isset($_POST['borrar']) && $_POST['borrar']=="Borrar")
 {
 $ldaphost = "localhost";
 $ldaprdn  = 'uid='.trim($_POST['uidBorrar']).',ou='.trim($_POST['ouBorrar']).',dc=fjeclot,dc=net';
-
 $ldappass = "fjeclot";  
 
     $ldapconn = ldap_connect($ldaphost) or die("Could not connect to LDAP server.");
@@ -149,34 +142,71 @@ $ldappass = "fjeclot";
     if ($ldapconn) {
         $ldapbind = ldap_bind($ldapconn, "cn=admin,dc=fjeclot,dc=net", $ldappass);
         if ($ldapbind) {
-			
-
-					
        
                 $d = ldap_delete($ldapconn, $ldaprdn);
                 if($d){
                 $_SESSION["mainTittle"]="Usuario borrado con éxito";
 				$_SESSION["secondaryTittle"]="El usuario ".trim($_POST['uidBorrar'])." se ha borrado de la base de datos";
-				$_SESSION["href"]="borrar.php";
+				$_SESSION["href"]="opciones.php";
 				header("Location: success.php");}
                 else{
 				   $_SESSION["mainTittle"] = "FALLO AL BORRAR ENTRADA";
 				   $_SESSION["secondaryTittle"] = "No es reconocido el usuario ".trim($_POST['uidBorrar'])."en la base de datos";
-				   $_SESSION["href"]="borrar.php";
+				   $_SESSION["href"]="opciones.php";
 				   header("Location:error.php");} 
         } 
         else {
         		$_SESSION["mainTittle"] = "FALLO AL ENTRAR BASE DE DATOS";
 				$_SESSION["secondaryTittle"] = "No ha sido posible autentificarse";
-				$_SESSION["href"]="borrar.php";
+				$_SESSION["href"]="opciones.php";
 				header("Location:error.php");
         }
    }else {
         $_SESSION["mainTittle"] = "FALLO AL CONECTAR BASE DE DATOS";
 				$_SESSION["secondaryTittle"] = "No ha sido posible conectarse";
-				$_SESSION["href"]="borrar.php";
+				$_SESSION["href"]="opciones.php";
 				header("Location:error.php");
         }
  }
+
+ //modificar
+if(isset($_POST['modificar']) && $_POST['modificar']=='modificar'){
+	$connection = ldap_connect("ldap://localhost",389) or die("No s'ha pogut establir una connexió amb el servidor openLDAP.");
+
+    ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+
+if($connection){
+
+	$bind = ldap_bind($connection,"cn=admin,dc=fjeclot,dc=net","fjeclot");	
+	if($bind){
+		 $user= trim($_POST["uidModOp"]);
+		 $ou= trim($_POST["ouModOp"]);
+		 $c= "uid=".$user.",ou=".$ou.",dc=fjeclot,dc=net";
+		 $type= $_POST["radio"];
+		 $newinfo[$type] = trim($_POST["valor"]);
+
+		 	$b = ldap_modify($connection, $c, $newinfo);
+			if($b){$_SESSION["mainTittle"]="Usuario modificado con éxito";
+				$_SESSION["secondaryTittle"]="Los cambios se han añadido a la base de datos";
+				$_SESSION["href"]="opciones.php";
+				header("Location: success.php");
+			}else{
+				
+				$_SESSION["mainTittle"] = "FALLO AL CREAR NUEVA ENTRADA";
+				$_SESSION["secondaryTittle"] = "No ha sido posible crear un nuevo usuario en la base de datos :".$n;
+				$_SESSION["href"]="opciones.php";
+				header("Location:error.php");
+			}
+
+	}else{
+		$_SESSION["mainTittle"] = "FALLO AL CREAR NUEVA ENTRADA";
+		$_SESSION["secondaryTittle"] = "No ha sido posible crear un nuevo usuario en la base de datos :".$n;
+		$_SESSION["href"]="opciones.php";
+		header("Location:error.php");
+	}	
+}else{echo "error";}	
+
+}
+
 
 ?>

@@ -31,6 +31,7 @@ session_start();
                             <input type="text" class="form-control" name="direccion" placeholder="direccion" required>
                             <input type="number" class="form-control" name="uidnumber" placeholder="uidnumber" required>
                             <input type="number" class="form-control" name="gidnumber" placeholder="gidnumber" required>
+                            <input type="password" class="form-control" name="userpassword" placeholder="contraseña" required>
                             <textArea class="form-control" name="descripcion" rows="5" placeholder="descripcion" required></textArea>
 
                         </div>
@@ -50,7 +51,6 @@ session_start();
             <div class="col-lg-4 L"></div>
         </div>
     </div>
-
 </body>
 
 

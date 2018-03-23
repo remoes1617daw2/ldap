@@ -32,10 +32,10 @@
             <div class="secondaryTitle">
           <?php echo "<h4>".$_SESSION["secondaryTittle"]."</h4>"; ?>
             </div>
-        <?php  echo '<a class="mainLink" href='.$_SESSION["href"].'><button class="btn btn-primary btn-lg" type="button">Atras</button></a>'; ?>
+        <?php  echo '<a class="mainLink" href='.$_SESSION["href"].'><button class="btn btn-primary btn-lg btn-left" type="button">Atras</button></a>'; ?>
         <a href='login.php'>
-                        <button class="btn btn-primary btn-lg" type="button">Salir</button>
-                </a>
+            <button class="btn btn-primary btn-lg btn-right" type="button">Salir</button>
+        </a>
         
         </div>             
         <div class="col-lg-4">

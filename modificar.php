@@ -9,7 +9,6 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
 </head>
 
 <body>
@@ -21,31 +20,28 @@ session_start();
                 <div class="mainContainer">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="ou" placeholder="ou" required>
-                            <input type="text" class="form-control" name="uid" placeholder="uid" required>
+                            <input type="text" class="form-control" name="ouModOp" placeholder="ou" required>
+                            <input type="text" class="form-control" name="uidModOp" placeholder="uid" required>
                             <div class="radio"> 
-                            <label><input type="radio" name="radio" value="ou">ou</label>
+                            <label><input type="radio" name="radio" value="cn">nombre completo</label>
                             </div>
-                            <div class="radio"> 
-                            <label><input type="radio" name="radio" value="uid">uid</label>
-                            </div>
-                            <div class="radio"> 
-                            <label><input type="radio" name="radio" value="nombre">nombre</label>
+                             <div class="radio">
+                            <label><input type="radio" name="radio" value="sn">apellido</label>
                             </div>
                             <div class="radio">
-                            <label><input type="radio" name="radio" value="apellido">apellido</label>
+                            <label><input type="radio" name="radio" value="givenname">givenname</label>
                             </div>
                             <div class="radio">
-                            <label><input type="radio" name="radio" value="titulo" >título</label>
+                            <label><input type="radio" name="radio" value="title">título</label>
                             </div>
                             <div class="radio">
-                            <label><input type="radio" name="radio" value="telefono">teléfono</label>
+                            <label><input type="radio" name="radio" value="telephonenumber">teléfono</label>
                             </div>
                             <div class="radio">
-                            <label><input type="radio" name="radio" value="mobil">mobil</label>
+                            <label><input type="radio" name="radio" value="mobile">mobil</label>
                             </div>
                             <div class="radio">
-                            <label><input type="radio" name="radio" value="direccion">dirección</label>
+                            <label><input type="radio" name="radio" value="postaladdress">dirección</label>
                             </div>
                             <div class="radio">
                             <label><input type="radio" name="radio" value="uidnumber">uidnumber</label>
@@ -54,10 +50,13 @@ session_start();
                             <label><input type="radio" name="radio" value="gidnumber">gidnumber</label>
                             </div>
                             <div class="radio">
-                            <label><input type="radio" name="radio" value="descripcion">descripcion</label>
+                            <label><input type="radio" name="radio" value="description">descripcion</label>
                             </div>
-                            <input class="form-control" type="text" name="valor" value="">
-                           
+                            <div class="radio">
+                            <label><input type="radio" id="password" onclick="changeType()" name="radio" value="userpassword">contraseña</label>
+                            </div>
+                            <input class="form-control" type="text" id="valor" name="valor">
+                                                  
 
                         </div>
                         <div class="inputs">
@@ -76,7 +75,17 @@ session_start();
             <div class="col-lg-4 L"></div>
         </div>
     </div>
-
+       <script type="text/javascript">
+       function changeType(){
+       var check = document.getElementById("password");
+	        if(check.checked == true){
+	            document.getElementById("valor").type = "password";
+	        }
+	        else{
+	        	document.getElementById("valor").type = "text";
+	        }
+    	}
+    </script>
 </body>
 
 

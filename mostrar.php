@@ -19,7 +19,7 @@ session_start();
             <div class="col-lg-4 "></div>
             <div class="col-lg-4">
                 <h2 class="text-primary">Mostrar Usuario</h2>
-                <div class="mainContainer">
+                <div class="mainContainerMostrar">
                     <form action="router.php" method="POST" style="margin-top: 0em !important;">
                         <div class="form-group">
                             <input type="text" class="form-control" name="uid" placeholder="uid" required>
@@ -41,7 +41,7 @@ session_start();
                 </div>
 
             </div>
-            <div class="col-lg-4 "></div> 
+           
         </div>
     </div>
 

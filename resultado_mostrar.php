@@ -44,8 +44,6 @@
                echo "<tr><td>Description: </td><td>".$info[$i]["description"][0]."</td></tr>";
            
             }
-
-
             echo "</table>";
             ?>
                 </div>
